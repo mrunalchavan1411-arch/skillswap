@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F7F4ED;
+  color: #2B2B28;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0F1420;
+  color: #E8E6E0;
+}
+
+/* Skill tag - stamped paper-label look, signature visual element of the app */
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 0.28rem 0.6rem;
+  border-radius: 4px;
+  border: 1px dashed currentColor;
+  white-space: nowrap;
+}
+
+/* Hairline divider used across cards to echo the ledger/noticeboard motif */
+.hairline {
+  border-top: 1px solid #D8D2C4;
+}
+html.dark .hairline {
+  border-top: 1px solid #2C3550;
+}
+
+/* ===== Glassmorphism utilities ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+html.dark .glass {
+  background: rgba(23, 29, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(216, 210, 196, 0.6);
+  box-shadow: 0 8px 32px rgba(27, 42, 78, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+html.dark .glass-card {
+  background: rgba(31, 39, 60, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.glass-card:hover {
+  box-shadow: 0 12px 40px rgba(27, 42, 78, 0.14);
+}
+html.dark .glass-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Surfaces that should flip in dark mode without full glass effect */
+.surface {
+  background-color: #ffffff;
+  border-color: #D8D2C4;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+html.dark .surface {
+  background-color: #171D2E;
+  border-color: #2C3550;
+  color: #E8E6E0;
+}
+
+.text-flip { color: #1B2A4E; }
+html.dark .text-flip { color: #F0EEE8; }
+.text-flip-muted { color: #8A8474; }
+html.dark .text-flip-muted { color: #8189A3; }
+
+/* Shimmer skeleton loader */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #EFEAE0;
+}
+html.dark .skeleton {
+  background: #1F273C;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: shimmer 1.4s infinite;
+}
+html.dark .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #E8893E, #2F8F7F);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Custom scrollbar - subtle, matches paper theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EFEAE0;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9C2B2;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #171D2E;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #2C3550;
+}
+
+/* Focus visibility - accessibility */
+button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible, select:focus-visible {
+  outline: 2px solid #2F8F7F;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

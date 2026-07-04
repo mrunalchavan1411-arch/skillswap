@@ -1,0 +1,126 @@
+{
+  "users": [
+    {
+      "id": "1782845731255",
+      "name": "mrunal",
+      "email": "mrunalchavan1411@gmail.com",
+      "password": "$2b$10$1R8z.YzgqljDFhqRxJuLMOLgCSR6vISihVw5eu/XHlBGlOoyKy8Fu",
+      "skillsOffered": [
+        "excel",
+        "code",
+        "gaming"
+      ],
+      "skillsWanted": [
+        "Guitar"
+      ],
+      "bio": "v",
+      "location": "c",
+      "availability": [],
+      "rating": 0,
+      "createdAt": "2026-06-30T18:55:31.255Z"
+    },
+    {
+      "id": "1783063141165",
+      "name": "mrunal",
+      "email": "swarupwalokar2006@gmail.com",
+      "password": "$2b$10$ToyD9bcJRUsQntcWIKI8CuMdhhOxxXuAGOaMiFvaZXlEtllZylW1a",
+      "skillsOffered": [
+        "Excel"
+      ],
+      "skillsWanted": [
+        "Code"
+      ],
+      "bio": "Aspiring Full-Stack Developer currently pursuing Bachelor of Computer Applications (BCA) from Savitribai Phule Pune University, Pune. I am passionate about web development and building responsive, user-friendly, and efficient web applications.\n\nI have hands-on experience with HTML, CSS, JavaScript, PHP, and React, and I enjoy working on real-world projects that improve my problem-solving and development skills. I am continuously learning modern tools and technologies to enhance my full-stack development abilities.\n\nI am actively looking for internship opportunities where I can contribute, learn, and grow as a developer while working on impactful projects.",
+      "location": "Pune ",
+      "availability": [],
+      "rating": 0,
+      "createdAt": "2026-07-03T07:19:01.165Z",
+      "avatar": "/uploads/avatar_1783063141165_1783101225440.png"
+    },
+    {
+      "id": "1783153609144",
+      "name": "mrunal",
+      "email": "chavanmrunal1411@gmail.com",
+      "password": "$2b$10$Wd.Ovv/LRsWNeBN2RHxdIOI7vvDlxFBghJssvwXW9eWDy88XzXVfi",
+      "skillsOffered": [
+        "excel",
+        "python"
+      ],
+      "skillsWanted": [
+        "cricket",
+        "code"
+      ],
+      "bio": "",
+      "location": "",
+      "availability": [],
+      "rating": 0,
+      "createdAt": "2026-07-04T08:26:49.144Z",
+      "avatar": "/uploads/avatar_1783153609144_1783153642680.jpeg"
+    }
+  ],
+  "matches": [],
+  "sessions": [],
+  "messages": [
+    {
+      "id": "1783158340511",
+      "senderId": "1783153609144",
+      "senderName": "mrunal",
+      "receiverId": "1783063141165",
+      "message": "hey",
+      "timestamp": "2026-07-04T09:45:40.511Z"
+    },
+    {
+      "id": "1783165917458",
+      "senderId": "1783153609144",
+      "senderName": "mrunal",
+      "receiverId": "1783063141165",
+      "message": "😀",
+      "timestamp": "2026-07-04T11:51:57.458Z"
+    },
+    {
+      "id": "1783166430198",
+      "senderId": "1783153609144",
+      "senderName": "mrunal",
+      "receiverId": "1783063141165",
+      "message": ".",
+      "timestamp": "2026-07-04T12:00:30.198Z"
+    },
+    {
+      "id": "1783188561975",
+      "senderId": "1783153609144",
+      "senderName": "mrunal",
+      "receiverId": "1783063141165",
+      "message": "",
+      "attachment": {
+        "name": "11th.pdf",
+        "url": "/uploads/chat_1783188561962.pdf",
+        "type": "application/pdf",
+        "size": 251546
+      },
+      "timestamp": "2026-07-04T18:09:21.975Z"
+    },
+    {
+      "id": "1783188636013",
+      "senderId": "1783153609144",
+      "senderName": "mrunal",
+      "receiverId": "1783063141165",
+      "message": "",
+      "attachment": {
+        "name": "Screenshot 2025-10-07 192000.png",
+        "url": "/uploads/chat_1783188635980.png",
+        "type": "image/png",
+        "size": 1335601
+      },
+      "timestamp": "2026-07-04T18:10:36.013Z"
+    },
+    {
+      "id": "1783189693662",
+      "senderId": "1783063141165",
+      "senderName": "mrunal",
+      "receiverId": "1783153609144",
+      "message": "gdhdhghghdhghgh",
+      "attachment": null,
+      "timestamp": "2026-07-04T18:28:13.662Z"
+    }
+  ]
+}
