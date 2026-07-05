@@ -3,7 +3,7 @@
 
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = "https://skillswap-premium-backend.onrender.com/api";
 
 // Single shared socket instance - poori app me ek hi connection use hota hai
 const socket = io(SOCKET_URL, {
