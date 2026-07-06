@@ -68,22 +68,27 @@ router.post('/avatar', authMiddleware, upload.single('avatar'), (req, res) => {
    const avatarPath = `/uploads/${req.file.filename}`;
 
 db.get("users")
-  .find((u) => String(u.id) === String(req.user.id))
+  .find({ id: req.user.id })
   .assign({
     avatar: avatarPath
   })
   .write();
 
-console.log("========== DEBUG ==========");
-console.log("req.user:", req.user);
-console.log("req.user.id:", req.user.id);
-console.log("Database users:", db.get("users").value());
-console.log("===========================");
-
-const updatedUser = db
-  .get("users")
-  .find((u) => String(u.id) === String(req.user.id))
+const updatedUser = db.get("users")
+  .find({ id: req.user.id })
   .value();
+
+console.log("Updated User:", updatedUser);
+
+if (!updatedUser) {
+  console.log("User not found. req.user =", req.user);
+  console.log("All users =", db.get("users").value());
+
+  return res.status(404).json({
+    success: false,
+    message: "User not found"
+  });
+}
 
 if (!updatedUser) {
   return res.status(404).json({
