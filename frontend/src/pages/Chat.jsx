@@ -72,7 +72,9 @@ export default function Chat() {
         setMessages((prev) => [...prev, msg]);
       }
     };
-    const handleSent = () => {};
+    const handleSent = (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    };
     const handleTyping = (data) => {
   if (data.senderId === activePartner?.id) {
     setIsTyping(true);
