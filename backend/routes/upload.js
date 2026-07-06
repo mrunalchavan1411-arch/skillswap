@@ -74,6 +74,12 @@ db.get("users")
   })
   .write();
 
+console.log("========== DEBUG ==========");
+console.log("req.user:", req.user);
+console.log("req.user.id:", req.user.id);
+console.log("Database users:", db.get("users").value());
+console.log("===========================");
+
 const updatedUser = db
   .get("users")
   .find((u) => String(u.id) === String(req.user.id))
