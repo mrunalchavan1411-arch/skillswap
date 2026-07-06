@@ -65,29 +65,42 @@ router.post('/avatar', authMiddleware, upload.single('avatar'), (req, res) => {
     }
 
     // Path DB me save karte hain
-    const avatarPath = `/uploads/${req.file.filename}`;
+   const avatarPath = `/uploads/${req.file.filename}`;
 
 db.get("users")
-  .find({ id: req.user.id })
-  .assign({ avatar: avatarPath })
+  .find((u) => String(u.id) === String(req.user.id))
+  .assign({
+    avatar: avatarPath
+  })
   .write();
 
-console.log("Logged in user:", req.user);
-console.log("User ID:", req.user.id);
-
-const updatedUser = db.get("users")
-  .find({ id: req.user.id })
+const updatedUser = db
+  .get("users")
+  .find((u) => String(u.id) === String(req.user.id))
   .value();
 
-console.log("Updated User:", updatedUser);
+if (!updatedUser) {
+  return res.status(404).json({
+    success: false,
+    message: "User not found"
+  });
+}
 
 const { password, ...userWithoutPassword } = updatedUser;
 
-    res.json({ success: true, avatarPath, user: userWithoutPassword });
-  } catch (err) {
-    console.error('Avatar upload error:', err);
-    res.status(500).json({ success: false, message: 'Upload failed.' });
-  }
+res.json({
+  success: true,
+  avatarPath,
+  user: userWithoutPassword
+});
+} catch (err) {
+  console.error("Avatar upload error:", err);
+
+  res.status(500).json({
+    success: false,
+    message: "Upload failed"
+  });
+}
 });
 
 // POST /api/upload/chat
