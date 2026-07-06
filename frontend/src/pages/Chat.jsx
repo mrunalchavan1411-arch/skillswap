@@ -244,7 +244,7 @@ export default function Chat() {
                   <div
   className={`max-w-[75%] px-5 py-3 rounded-3xl shadow-lg transition-all duration-300 ${
     m.senderId === user.id
-      ? 'bg-green-600 text-white rounded-br-md'
+      ? 'bg-black text-white'
       : 'bg-white/70 dark:bg-white/10 backdrop-blur-md text-flip border border-white/10 rounded-bl-md'
   }`}
 >
