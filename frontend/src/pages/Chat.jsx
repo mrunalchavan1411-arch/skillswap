@@ -72,9 +72,7 @@ export default function Chat() {
         setMessages((prev) => [...prev, msg]);
       }
     };
-    const handleSent = (msg) => {
-      setMessages((prev) => [...prev, msg]);
-    };
+    const handleSent = () => {};
     const handleTyping = (data) => {
   if (data.senderId === activePartner?.id) {
     setIsTyping(true);
@@ -259,7 +257,7 @@ export default function Chat() {
     <div className="mt-2">
       {m.attachment.type?.startsWith("image/") ? (
         <img
-          href={`const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";${m.attachment.url}`}
+          src={`const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";${m.attachment.url}`}
           alt={m.attachment.name}
           className="rounded-xl max-w-[220px] cursor-pointer"
         />
