@@ -20,6 +20,7 @@ import {
 
 import socket from '../services/socket';
 import EmojiPicker from "emoji-picker-react";
+const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";
 
 export default function Chat() {
   const { user } = useAuth();
@@ -243,7 +244,7 @@ export default function Chat() {
                   <div
   className={`max-w-[75%] px-5 py-3 rounded-3xl shadow-lg transition-all duration-300 ${
     m.senderId === user.id
-      ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-br-md'
+      ? 'bg-green-600 text-white rounded-br-md'
       : 'bg-white/70 dark:bg-white/10 backdrop-blur-md text-flip border border-white/10 rounded-bl-md'
   }`}
 >
@@ -259,13 +260,13 @@ export default function Chat() {
     <div className="mt-2">
       {m.attachment.type?.startsWith("image/") ? (
         <img
-          src={`const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";${m.attachment.url}`}
+          src={`${BACKEND_URL}${m.attachment.url}`}
           alt={m.attachment.name}
           className="rounded-xl max-w-[220px] cursor-pointer"
         />
       ) : (
         <a
-          href={`const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";${m.attachment.url}`}
+          href={`${BACKEND_URL}${m.attachment.url}`}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg hover:bg-white/20"
