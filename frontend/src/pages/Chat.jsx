@@ -118,14 +118,7 @@ export default function Chat() {
       uploadedFile = res.data.file;
     }
 
-    socket.on("typing", (data) => {
-  const receiverSocketId = onlineUsers.get(data.receiverId);
-
-  if (receiverSocketId) {
-    io.to(receiverSocketId).emit("typing", data);
-  }
-});
-
+   
     socket.emit("send_message", {
       senderId: user.id,
       senderName: user.name,
@@ -266,13 +259,13 @@ export default function Chat() {
     <div className="mt-2">
       {m.attachment.type?.startsWith("image/") ? (
         <img
-          src={`http://localhost:5000${m.attachment.url}`}
+          href={`const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";${m.attachment.url}`}
           alt={m.attachment.name}
           className="rounded-xl max-w-[220px] cursor-pointer"
         />
       ) : (
         <a
-          href={`http://localhost:5000${m.attachment.url}`}
+          href={`const BACKEND_URL = "https://skillswap-premium-backend.onrender.com";${m.attachment.url}`}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg hover:bg-white/20"

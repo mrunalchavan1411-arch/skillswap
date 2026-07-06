@@ -59,6 +59,29 @@ io.on('connection', (socket) => {
     onlineUsers.set(userId, socket.id);
     console.log(`User ${userId} online hua.`);
   });
+  socket.on("send_message", (data) => {
+  const newMessage = {
+    id: Date.now().toString(),
+    senderId: data.senderId,
+    receiverId: data.receiverId,
+    message: data.message,
+    attachment: data.attachment || null,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Save in database
+  db.get("messages").push(newMessage).write();
+
+  // Send to receiver if online
+  const receiverSocketId = onlineUsers.get(data.receiverId);
+
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("receive_message", newMessage);
+  }
+
+  // Send back to sender also
+  socket.emit("receive_message", newMessage);
+});
 
   // Jab user message bheje
   socket.on('send_message', (data) => {

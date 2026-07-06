@@ -19,7 +19,9 @@ router.get('/:partnerId', authMiddleware, (req, res) => {
   );
 
   // Time ke hisaab se sort - purane pehle, naye baad me
-  messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  messages.sort(
+  (a, b) => new Date(a.createdAt || a.timestamp) - new Date(b.createdAt || b.timestamp)
+);
 
   res.json({ success: true, messages });
 });
@@ -40,13 +42,15 @@ router.get('/conversations/list', authMiddleware, (req, res) => {
     const partner = db.get('users').find({ id: pid }).value();
     const lastMsg = allMessages
       .filter(m => (m.senderId === pid && m.receiverId === myId) || (m.senderId === myId && m.receiverId === pid))
-      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+      .sort(
+  (a, b) => new Date(b.createdAt || b.timestamp) - new Date(a.createdAt || a.timestamp)
+)[0];
 
     return {
       partnerId: pid,
       partnerName: partner ? partner.name : 'Unknown',
       lastMessage: lastMsg ? lastMsg.message : '',
-      lastTimestamp: lastMsg ? lastMsg.timestamp : ''
+      lastTimestamp: lastMsg ? (lastMsg.createdAt || lastMsg.timestamp) : ''
     };
   });
 
