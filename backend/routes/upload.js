@@ -67,12 +67,19 @@ router.post('/avatar', authMiddleware, upload.single('avatar'), (req, res) => {
     // Path DB me save karte hain
    const avatarPath = `/uploads/${req.file.filename}`;
 
+   console.log("JWT USER:", req.user);
+console.log("JWT ID:", req.user.id);
+console.log("DB IDs:", db.get("users").map(u => u.id).value());
+console.log("MATCH:", db.get("users").find({ id: req.user.id }).value());
+
 db.get("users")
   .find({ id: req.user.id })
   .assign({
     avatar: avatarPath
   })
   .write();
+
+  
 
 const updatedUser = db.get("users")
   .find({ id: req.user.id })
