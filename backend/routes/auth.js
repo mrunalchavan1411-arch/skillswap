@@ -77,6 +77,9 @@ router.post('/signup', async (req, res) => {
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
+
+    console.log("REQUEST BODY:", req.body);
+
     const { email, password } = req.body;
 
     if (!email || !password) {
