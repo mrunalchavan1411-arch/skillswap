@@ -24,7 +24,14 @@ router.post('/signup', async (req, res) => {
     }
 
     // Check karo email already exist to nahi karta
+console.log("===== SIGNUP DEBUG =====");
+console.log("Database users:");
+console.log(db.get("users").value());
+
+
     const existingUser = db.get('users').find({ email: email.toLowerCase() }).value();
+console.log("Existing User:", existingUser);
+
     if (existingUser) {
       return res.status(409).json({ success: false, message: 'Yeh email already registered hai.' });
     }
