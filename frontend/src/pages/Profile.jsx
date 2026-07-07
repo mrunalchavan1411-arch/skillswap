@@ -89,7 +89,7 @@ export default function Profile() {
     }
   };
 
-  const BACKEND = 'http://localhost:5000';
+  const BACKEND = "https://skillswap-premium-backend.onrender.com";
   const avatarSrc = avatarPreview || (user?.avatar ? `${BACKEND}${user.avatar}` : null);
 
   return (

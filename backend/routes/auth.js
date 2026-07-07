@@ -86,12 +86,21 @@ router.post('/login', async (req, res) => {
     // User dhundo database me
     const user = db.get('users').find({ email: email.toLowerCase() }).value();
 
+console.log("========== LOGIN DEBUG ==========");
+console.log("Email received:", email);
+console.log("Email after lowercase:", email.toLowerCase());
+console.log("User found:", user);
+
+
     if (!user) {
       return res.status(401).json({ success: false, message: 'Email ya password galat hai.' });
     }
 
     // Password match karo (hashed password ke saath compare)
     const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    console.log("Password match:", isPasswordValid);
+console.log("================================");
 
     if (!isPasswordValid) {
       return res.status(401).json({ success: false, message: 'Email ya password galat hai.' });
