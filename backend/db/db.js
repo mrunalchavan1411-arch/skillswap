@@ -16,6 +16,7 @@ db.defaults({
   matches: [],
   sessions: [],
   messages: []
+  qualificationVerifications: []
 }).write();
 
 module.exports = db;
