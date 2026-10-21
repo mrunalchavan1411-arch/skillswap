@@ -320,4 +320,3 @@ router.post('/google', async (req, res) => {
 // EXPORT ROUTER
 // ==========================================
 module.exports = router;
-```
