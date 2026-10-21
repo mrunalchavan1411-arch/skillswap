@@ -1,11 +1,10 @@
-// pages/Login.jsx
-// Login page - split screen design: left side branding, right side form
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Repeat2, ArrowRight } from 'lucide-react';
-import { loginApi } from '../services/api';
+import { GoogleLogin } from '@react-oauth/google';
+import { loginApi, googleLoginApi } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
@@ -14,6 +13,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
   const { login } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -28,9 +29,35 @@ export default function Login() {
       login(res.data.user, res.data.token);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login me kuch gadbad hui. Try again.');
+      setError(
+        err.response?.data?.message ||
+        'Login me kuch gadbad hui. Try again.'
+      );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (response) => {
+    if (!response.credential) {
+      setError('Google credential nahi mila. Please try again.');
+      return;
+    }
+
+    setError('');
+    setGoogleLoading(true);
+
+    try {
+      const res = await googleLoginApi(response.credential);
+      login(res.data.user, res.data.token);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        'Google Login failed. Please try again.'
+      );
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -40,42 +67,59 @@ export default function Login() {
       <div className="hidden lg:flex w-1/2 bg-ink text-paper flex-col justify-between px-14 py-12">
         <div className="flex items-center gap-2">
           <Repeat2 className="text-amber" size={28} strokeWidth={2.4} />
-          <span className="font-display font-semibold text-xl">SkillSwap</span>
+          <span className="font-display font-semibold text-xl">
+            SkillSwap
+          </span>
         </div>
 
         <div>
           <h1 className="font-display text-4xl leading-tight mb-4">
-            Teach what you know.<br />Learn what you don't.
+            Teach what you know.<br />
+            Learn what you don't.
           </h1>
           <p className="text-paper/60 max-w-md leading-relaxed">
-            A campus exchange where every skill is currency. List what you can teach,
-            find who can teach you back, and swap — no money involved.
+            A campus exchange where every skill is currency. List what you
+            can teach, find who can teach you back, and swap — no money involved.
           </p>
         </div>
 
-        <p className="text-xs text-paper/40 font-mono">College Resource Sharing Web App</p>
+        <p className="text-xs text-paper/40 font-mono">
+          College Resource Sharing Web App
+        </p>
       </div>
 
       {/* Right form panel */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center bg-paper px-6">
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-paper px-6 py-10">
         <div className="w-full max-w-sm">
           <div className="lg:hidden flex items-center gap-2 mb-8 justify-center">
             <Repeat2 className="text-amberdark" size={26} />
-            <span className="font-display font-semibold text-xl text-ink">SkillSwap</span>
+            <span className="font-display font-semibold text-xl text-ink">
+              SkillSwap
+            </span>
           </div>
 
-          <h2 className="font-display text-2xl font-semibold text-ink mb-1">Welcome back</h2>
-          <p className="text-sm text-muted mb-8">Log in to continue your skill exchange.</p>
+          <h2 className="font-display text-2xl font-semibold text-ink mb-1">
+            Welcome back
+          </h2>
+          <p className="text-sm text-muted mb-8">
+            Log in to continue your skill exchange.
+          </p>
 
           {error && (
-            <div className="mb-5 px-4 py-3 rounded-md bg-red-50 border border-red-200 text-red-700 text-sm">
+            <div
+              role="alert"
+              className="mb-5 px-4 py-3 rounded-md bg-red-50 border border-red-200 text-red-700 text-sm"
+            >
               {error}
             </div>
           )}
 
+          {/* Existing email/password login */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-mono text-muted mb-1.5">EMAIL</label>
+              <label className="block text-xs font-mono text-muted mb-1.5">
+                EMAIL
+              </label>
               <input
                 type="email"
                 required
@@ -87,7 +131,9 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-muted mb-1.5">PASSWORD</label>
+              <label className="block text-xs font-mono text-muted mb-1.5">
+                PASSWORD
+              </label>
               <input
                 type="password"
                 required
@@ -101,7 +147,7 @@ export default function Login() {
             <motion.button
               whileTap={{ scale: 0.97 }}
               type="submit"
-              disabled={loading}
+              disabled={loading || googleLoading}
               className="w-full flex items-center justify-center gap-2 bg-ink text-paper font-medium py-2.5 rounded-md hover:bg-inklight transition-colors disabled:opacity-60 mt-2"
             >
               {loading ? 'Logging in...' : 'Log in'}
@@ -109,9 +155,33 @@ export default function Login() {
             </motion.button>
           </form>
 
+          {/* Google login */}
+          <div className="flex items-center gap-3 my-6">
+            <div className="flex-1 border-t border-line" />
+            <span className="text-xs text-muted">OR CONTINUE WITH</span>
+            <div className="flex-1 border-t border-line" />
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setError('Google sign-in failed. Please try again.')}
+              theme="outline"
+              shape="rectangular"
+              text="continue_with"
+              width="320"
+            />
+            {googleLoading && (
+              <p className="text-sm text-muted">Signing in with Google...</p>
+            )}
+          </div>
+
           <p className="text-sm text-muted text-center mt-7">
             New here?{' '}
-            <Link to="/signup" className="text-tealdark font-medium hover:underline">
+            <Link
+              to="/signup"
+              className="text-tealdark font-medium hover:underline"
+            >
               Create an account
             </Link>
           </p>
