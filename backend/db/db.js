@@ -15,7 +15,7 @@ db.defaults({
   users: [],
   matches: [],
   sessions: [],
-  messages: []
+  messages: [],
   qualificationVerifications: []
 }).write();
 
