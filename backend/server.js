@@ -16,6 +16,7 @@ const userRoutes = require('./routes/users');
 const sessionRoutes = require('./routes/sessions');
 const messageRoutes = require('./routes/messages');
 const uploadRoutes = require('./routes/upload');
+const assistantRoutes = require('./routes/assistant');
 
 const app = express();
 const server = http.createServer(app);
@@ -41,6 +42,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/assistant', assistantRoutes);  
 
 // Health check route - test karne ke liye ki server chal raha hai
 app.get('/api/health', (req, res) => {
