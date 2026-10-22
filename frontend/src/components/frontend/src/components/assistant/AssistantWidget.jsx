@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AssistantWidget.css';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = (
+  import.meta.env.VITE_API_URL ||
+  'https://skillswap-premium-backend.onrender.com'
+).replace(/\/$/, '');
 
 const suggestions = [
   'How do I find other students?',
