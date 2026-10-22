@@ -7,7 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ToastProvider } from './context/ToastContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import AssistantWidget from './components/assistant/AssistantWidget.jsx';
+import AssistantWidget from './components/AssistantWidget.jsx';
 
 
 import Landing from './pages/Landing';
