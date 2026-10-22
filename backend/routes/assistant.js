@@ -110,14 +110,21 @@ router.post('/chat', rateLimit, async (req, res) => {
       }
     );
 
-    if (!response.ok) {
-      console.error('Gemini API returned status:', response.status);
-      return res.status(502).json({
-        success: false,
-        message: 'The AI assistant could not respond. Please try again.'
-      });
-    }
+   if (!response.ok) {
+  const errorDetails = await response.text();
 
+  console.error(
+    'Gemini API returned status:',
+    response.status,
+    'details:',
+    errorDetails.slice(0, 1000)
+  );
+
+  return res.status(502).json({
+    success: false,
+    message: 'The AI assistant could not respond. Please try again.'
+  });
+}
     const data = await response.json();
     const reply = data.candidates?.[0]?.content?.parts
       ?.map(part => part.text || '')
