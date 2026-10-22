@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const MODEL = 'gemini-3.8-flash';
+const MODEL = 'gemini-3.5-flash-lite';
 const MAX_MESSAGE_LENGTH = 1000;
 const RATE_WINDOW_MS = 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 15;
